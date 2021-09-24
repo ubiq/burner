@@ -28,7 +28,7 @@ async function getTotalBurned() {
     console.log("Raw totalBurned: " + ethers.utils.formatEther(totalBurned.toString()));
     const purgerPercentage = ethers.BigNumber.from(10000);
     purgerReward = ethers.BigNumber.from(totalBurned).div(purgerPercentage)
-	totalBurnedMinusReward = ethers.BigNumber.from(totalBurned).sub(purgerReward)
+    totalBurnedMinusReward = ethers.BigNumber.from(totalBurned).sub(purgerReward)
     $("#totalBurned").text(ethers.utils.formatEther(totalBurnedMinusReward.toString()))
 }
 
