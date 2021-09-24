@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ubiq Burner</title>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <h1>Ubiq Burner</h1>
+
+    <h3>Reload</h3>
+    <a href="#" onclick="onPageLoad()" class="btn btn-primary">Reload</a> Force blockchain values to refresh.
+
+    <hr>
+    <h3>Purge</h3>
+    Purgers receive 0.001% of the Burner balance.
+    <br>
+    <a href="#" onclick="purge()" class="btn btn-primary">Purge</a>
+
+    <hr>
+    <h3>Balance</h3>
+    <b>Burner balance:</b> <span id="balance"></span> UBQ
+    <br>
+    <b>Purger reward:</b> <span id="currentPurgerReward"></span> UBQ
+
+    <hr>
+    <h3>Total Burned</h3>
+    <b>Total burned:</b> <span id="totalBurned"></span> UBQ
+
+    <hr>
+    <h3>Addresses</h3>
+    Burner: <a href="" id="burnerAddress"></a>
+
+    <hr>
+    For more information on how this works, see the Additional information section of the <a href="https://blog.ubiqsmart.com/announcing-nception-ba2eb5fc952">nCeption Announcement</a>.
+</body>
+<script src="https://cdn.ethers.io/lib/ethers-5.4.umd.min.js" type="application/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="index.js" type="text/javascript"></script>
+
+</html>
