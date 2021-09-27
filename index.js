@@ -6,7 +6,8 @@ abi = JSON.parse('[{"constant":false,"inputs":[],"name":"Burn","outputs":[],"pay
 let provider, signer, contract;
 
 async function connectWallet() {
-    window.ethereum.request({method: 'eth_requestAccounts'})
+    window.ethereum
+        .request({method: 'eth_requestAccounts'})
         .then(() => {
             provider = new ethers.providers.Web3Provider(window.ethereum);
             signer = provider.getSigner();
@@ -21,6 +22,14 @@ async function connectWallet() {
                 }
             });
         })
+        .catch((error) => {
+            if (error.code === 4001) {
+              // EIP-1193 userRejectedRequest error
+              console.log('Please connect to MetaMask.');
+            } else {
+              console.error(error);
+            }
+        });
 };
 
 // Purge
