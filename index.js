@@ -3,7 +3,7 @@ burnerAddress = '0x3605d4B5ed61236A516ae3B988d39B65a57Af157'
 
 abi = JSON.parse('[{"constant":false,"inputs":[],"name":"Burn","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"totalBurned","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Purge","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')
 
-let defaultAccount, provider, signer, chainID, contract;
+let provider, signer, contract;
 
 async function connectWallet() {
     window.ethereum.request({method: 'eth_requestAccounts'})
