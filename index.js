@@ -3,10 +3,25 @@ burnerAddress = '0x3605d4B5ed61236A516ae3B988d39B65a57Af157'
 
 abi = JSON.parse('[{"constant":false,"inputs":[],"name":"Burn","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"totalBurned","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Purge","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')
 
-let provider;
-window.ethereum.enable().then(provider = new ethers.providers.Web3Provider(window.ethereum));
-const signer = provider.getSigner();
-contract = new ethers.Contract(burnerAddress, abi, signer)
+let defaultAccount, provider, signer, chainID, contract;
+
+async function connectWallet() {
+    window.ethereum.request({method: 'eth_requestAccounts'})
+        .then(() => {
+            provider = new ethers.providers.Web3Provider(window.ethereum);
+            signer = provider.getSigner();
+            contract = new ethers.Contract(burnerAddress, abi, signer)
+
+            provider.listAccounts().then((accounts) => {
+                if (accounts.length > 0) {
+                    $("#connectBtn").text('Wallet Connected').removeClass('btn-warning').addClass('btn-success');
+                    onPageLoad();
+                } else {
+                    console.log("ERROR: Unable to retrieve accounts");
+                }
+            });
+        })
+};
 
 // Purge
 async function purge(){
@@ -37,10 +52,17 @@ function getMisc() {
     $("a#burnerAddress").text(burnerAddress)
     $("a#burnerAddress").attr("href", ubiqscanPrefix + burnerAddress)
 }
-    
 
 // Reload
 function onPageLoad() {
+    if (!window.ethereum) {
+        $("#connectBtn").text('Sparrow or Metamask not installed').removeClass('btn-warning').addClass('btn-danger');
+        return;
+    }
+    if (!provider) {
+        connectWallet();
+        return
+    }
     getBalance()
     getTotalBurned()
     getMisc()
